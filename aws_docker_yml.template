@@ -40,7 +40,7 @@ services:
       - /proc:/host/proc:ro
 
   app:
-    image: srikns/apm-agent:latest
+    image: srikns/apm-agent:2.0
     container_name: apm-agent
     ports:
       - "8999:8080"
