@@ -3,8 +3,8 @@ services:
   apmia-aws: 
     image : caapm/apmia:latest
     environment: 
-      - APMENV_AGENTMANAGER_URL_1=https://321633.dxi-na2.cloud.ca.com:443
-      - APMENV_AGENTMANAGER_CREDENTIAL=abfb5481-9f95-458b-86ee-3eae6cb4ee5a
+      - APMENV_AGENTMANAGER_URL_1=<AGENT_MANAGER_URL>
+      - APMENV_AGENTMANAGER_CREDENTIAL=<APM_SAAS_CREDENTIALS>
       - APMENV_INTROSCOPE_AGENT_EXTENSIONS_BUNDLES_LOAD=AWSExtension 
       - APMENV_COM_CA_APM_AGENT_AWS_ACCESSKEY=<AWS_ACCESS_KEY>
       - APMENV_COM_CA_APM_AGENT_AWS_SECRETKEY=<AWS_SECRET_KEY>
@@ -20,8 +20,8 @@ services:
   dockermonitor:
     image : caapm/dockermonitor:latest
     environment:
-      - agentManager_url_1=https://321633.dxi-na2.cloud.ca.com:443
-      - agentManager_credential=abfb5481-9f95-458b-86ee-3eae6cb4ee5a
+      - agentManager_url_1=<AGENT_MANAGER_URL>
+      - agentManager_credential=<APM_SAAS_CREDENTIALS>
       - containerflow=enabled
       - interval=30
       - type=Docker
