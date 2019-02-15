@@ -1,0 +1,56 @@
+version: "3"
+services:
+  apmia-aws: 
+    image : caapm/apmia:latest
+    environment: 
+      - APMENV_AGENTMANAGER_URL_1=https://321633.dxi-na2.cloud.ca.com:443
+      - APMENV_AGENTMANAGER_CREDENTIAL=abfb5481-9f95-458b-86ee-3eae6cb4ee5a
+      - APMENV_INTROSCOPE_AGENT_EXTENSIONS_BUNDLES_LOAD=AWSExtension 
+      - APMENV_COM_CA_APM_AGENT_AWS_ACCESSKEY=<AWS_ACCESS_KEY>
+      - APMENV_COM_CA_APM_AGENT_AWS_SECRETKEY=<AWS_SECRET_KEY>
+      - APMENV_INTROSCOPE_AGENT_AGENTNAME=aws_monitoring_agent 
+      - APMENV_INTROSCOPE_AGENT_ENTERPRISEMANAGER_TRANSPORT_HTTP_PROXY_HOST=example_proxy_server.com 
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '0.7' 
+          memory: 700M
+
+### docker monitoring
+  dockermonitor:
+    image : caapm/dockermonitor:latest
+    environment:
+      - agentManager_url_1=https://321633.dxi-na2.cloud.ca.com:443
+      - agentManager_credential=abfb5481-9f95-458b-86ee-3eae6cb4ee5a
+      - containerflow=enabled
+      - interval=30
+      - type=Docker
+    pid: host
+    command: ["sh","install.sh"]
+    deploy:
+      mode: global
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /dev:/host/dev:ro
+      - /sys:/host/sys:ro
+      - /boot:/host/boot:ro
+      - /home:/host/home:ro
+      - /run:/host/run:ro
+      - /var:/host/var:ro
+      - /proc:/host/proc:ro
+
+  app:
+    image: srikns/apm-agent:latest
+    container_name: apm-agent
+    ports:
+      - "8999:8080"
+    volumes:
+      - HOST_MOUNT_DIR/app/APP_RUNTIME/wily:/opt/ca/springbootApp/wily
+
+  jmeter:
+    build:
+      context: ./jmeter
+    environment:
+      - APP_HOST=172.17.0.1
+      - APP_PORT=8999
+    container_name: jmeter

@@ -1,0 +1,25 @@
+
+**********************************************
+
+**AWS Demo startup Script:** 
+This will setup your complete application docker monitoring and aws IA  in a container. 
+
+ #####################################################
+Ensure Docker, Docker Compose and mvn is installed 
+provide following value in aws-docker-yml.template
+
+ <AGENT_MANAGER_URL> - EM url:port
+ <APM_SAAS_CREDENTIALS> - from your SaaS agent
+ <AWS_ACCESS_KEY> - AWS access Key
+ <AWS_SECRET_KEY> - AWS secret key
+
+ #####################################################
+
+This will remove following container (if they exists) before setting up everything again... 
+ apm-agent dockermonitor jenkinsdockerinfrademo_dockermonitor_1
+
+
+Pls press Y and Enter to proceed.....
+
+********************************************
+
