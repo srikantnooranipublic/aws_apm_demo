@@ -20,6 +20,7 @@ function LOG {
 
 DOCKER_TEMPLATE="aws_docker_yml.template"
 
+MAC_LINUX=`uname -a | awk '{ print $1 }'`
 
 #disabling firewall etc
 if [ x"$MAC_LINUX" == "xLinux" ]; then
