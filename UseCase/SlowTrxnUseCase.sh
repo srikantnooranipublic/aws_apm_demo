@@ -4,6 +4,10 @@
 echo "Running Slow Trx Use Case"
 echo ""
 
+docker exec -d apm-agent nohup stress -c 10 -t 60 &
+
+sleep 10
+
 COUNTER=0
 while [ $COUNTER -lt 20 ]; do
 
